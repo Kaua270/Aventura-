@@ -1,25 +1,259 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aventura na Floresta Misteriosa</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #092e20, #176b43, #092e20);
+    color: white;
+    text-align: center;
+    min-height: 100vh;
+    padding: 25px;
+}
+
+.container {
+    max-width: 650px;
+    margin: 30px auto;
+    padding: 30px;
+    background: rgba(0, 0, 0, 0.65);
+    border-radius: 20px;
+    box-shadow: 0 0 20px #000;
+}
+
+h1 {
+    color: #a8ffb0;
+    font-size: 30px;
+}
+
+h2 {
+    color: #ffe680;
+}
+
+p {
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+img {
+    width: 100%;
+    max-height: 260px;
+    object-fit: cover;
+    border-radius: 15px;
+    margin: 15px 0;
+}
+
+button {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    margin: 12px 0;
+    border: none;
+    border-radius: 12px;
+    background: #38a169;
+    color: white;
+    font-size: 17px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #70d69b;
+    color: #123;
+    transform: scale(1.03);
+}
+
+#resultado {
+    margin-top: 20px;
+}
+
+footer {
+    margin-top: 25px;
+    color: #b8d8c0;
+    font-size: 13px;
+}
+</style>
 </head>
+
 <body>
-<h1>KAUA GABRIEL 1A</h1>   
-<p1>Me chamo Kaua, tenho 15 ano e sou de Curitiba</p1>
-    <p2>eu torço pro <strong>Athletco-PR</strong></p2>
-    <h2>Athletco-PR</h2>
-    <img src="i.png">
-<p3>Esse ano o Athletco completa 100 anos, durante esses 100 anos ele conquistou alguns <strong> titulos importantes...</strong></p3>
-<h3>TITULOS</h3>
-<ol>
-<l>28 Estaduais</l>
-<l>1 Campeonato Brasileiro</l>
-<l>2 Sul-Americanas</l>
-<l>1 Copa do Brasil</l>
-<l>1 libertadores</l>
-</ol>
-<img src="maxresdefault.jpg">
+
+<div class="container">
+
+<h1>🌳 Aventura na Floresta Misteriosa</h1>
+
+<img id="imagem"
+src="https://images.unsplash.com/photo-1448375240586-882707db888b?w=900"
+alt="Floresta misteriosa">
+
+<div id="historia">
+    <h2>O começo da aventura</h2>
+
+    <p>
+    Você encontrou um mapa antigo que indica um tesouro
+    escondido em uma floresta misteriosa.
+    Agora você precisa escolher seu caminho!
+    </p>
+
+    <p><strong>Qual caminho deseja seguir?</strong></p>
+</div>
+
+<div id="botoes">
+    <button onclick="escolher('luz')">
+        ✨ Seguir o caminho iluminado
+    </button>
+
+    <button onclick="escolher('escuro')">
+        🌑 Seguir o caminho escuro
+    </button>
+</div>
+
+<div id="resultado"></div>
+
+<footer>
+    Criado para uma aventura interativa 🌟
+</footer>
+
+</div>
+
+<script>
+
+function escolher(opcao) {
+
+    const historia = document.getElementById("historia");
+    const botoes = document.getElementById("botoes");
+    const imagem = document.getElementById("imagem");
+    const resultado = document.getElementById("resultado");
+
+    resultado.innerHTML = "";
+
+    if (opcao === "luz") {
+
+        imagem.src = "https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=900";
+
+        historia.innerHTML = `
+        <h2>✨ A cachoeira mágica</h2>
+        <p>
+        Você encontrou uma cachoeira brilhante.
+        Uma fada aparece e oferece ajuda.
+        </p>
+        <p><strong>O que você vai fazer?</strong></p>
+        `;
+
+        botoes.innerHTML = `
+        <button onclick="escolher('fada')">
+        🧚 Aceitar a ajuda da fada
+        </button>
+
+        <button onclick="escolher('caverna')">
+        🪨 Explorar uma caverna
+        </button>
+        `;
+
+    }
+
+    else if (opcao === "escuro") {
+
+        imagem.src = "https://images.unsplash.com/photo-1511497584788-876760111969?w=900";
+
+        historia.innerHTML = `
+        <h2>🌑 O caminho escuro</h2>
+        <p>
+        Você encontra uma ponte antiga e escuta
+        um barulho misterioso atrás das árvores.
+        </p>
+        <p><strong>O que você vai fazer?</strong></p>
+        `;
+
+        botoes.innerHTML = `
+        <button onclick="escolher('ponte')">
+        🌉 Atravessar a ponte
+        </button>
+
+        <button onclick="escolher('animal')">
+        🐺 Investigar o barulho
+        </button>
+        `;
+
+    }
+
+    else if (opcao === "fada") {
+
+        finalizar(
+        "🏆 Você encontrou o tesouro!",
+        "A fada entregou uma chave mágica. Você abriu um baú cheio de ouro e pedras preciosas. Sua bondade foi recompensada!",
+        "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=900"
+        );
+
+    }
+
+    else if (opcao === "caverna") {
+
+        finalizar(
+        "🐉 O dragão guardião",
+        "Dentro da caverna você encontrou um dragão. Com coragem, conversou com ele e recebeu uma joia mágica como recompensa!",
+        "https://images.unsplash.com/photo-1518709594023-6eab9bab7b23?w=900"
+        );
+
+    }
+
+    else if (opcao === "ponte") {
+
+        finalizar(
+        "💰 O tesouro perdido!",
+        "Você atravessou a ponte com coragem e encontrou um baú cheio de moedas de ouro. Sua aventura foi um sucesso!",
+        "https://images.unsplash.com/photo-1511497584788-876760111969?w=900"
+        );
+
+    }
+
+    else if (opcao === "animal") {
+
+        finalizar(
+        "❤️ Uma nova amizade!",
+        "Você encontrou um lobo preso entre galhos e decidiu ajudá-lo. Como agradecimento, ele mostrou uma passagem secreta para fora da floresta!",
+        "https://images.unsplash.com/photo-1473448912268-2022ce9509d8?w=900"
+        );
+
+    }
+
+}
+
+function finalizar(titulo, texto, foto) {
+
+    document.getElementById("imagem").src = foto;
+
+    document.getElementById("historia").innerHTML = `
+        <h2>${titulo}</h2>
+        <p>${texto}</p>
+    `;
+
+    document.getElementById("botoes").innerHTML = `
+        <button onclick="reiniciar()">
+        🔄 Jogar novamente
+        </button>
+    `;
+
+    document.getElementById("resultado").innerHTML =
+        "<h2>🌟 FIM DA AVENTURA 🌟</h2>";
+
+}
+
+function reiniciar() {
+
+    location.reload();
+
+}
+
+</script>
+
 </body>
 </html>
